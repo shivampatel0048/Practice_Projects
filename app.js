@@ -70,11 +70,11 @@ app.post("/", function (req, res) {
     name: itemName
   });
 
-  if ( listName === "Today" ) {
+  if (listName === "Today") {
     item.save();
     res.redirect("/");
   } else {
-    List.findOne({name: listName}, (err, foundList) => {
+    List.findOne({ name: listName }, (err, foundList) => {
       foundList.items.push(item);
       foundList.save();
       res.redirect("/" + listName);
@@ -95,8 +95,8 @@ app.post("/delete", (req, res) => {
       }
     });
   } else {
-    List.findOneAndUpdate({name: listName}, {$pull: {items: {_id: checkedItemId}}}, (err, foundList) => {
-      if (!err){
+    List.findOneAndUpdate({ name: listName }, { $pull: { items: { _id: checkedItemId } } }, (err, foundList) => {
+      if (!err) {
         res.redirect("/" + listName);
       }
     });
